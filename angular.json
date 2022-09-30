@@ -31,6 +31,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@nebular/theme/styles/prebuilt/corporate.css",
+              "node_modules/@nebular/auth/styles/prebuilt/corporate.css",
               "src/styles.scss"
             ],
             "scripts": []

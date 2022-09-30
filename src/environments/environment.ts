@@ -1,11 +1,18 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import {IEnvironment} from "./ienvironment";
 
-export const environment = {
+const apiHost = 'possible-dragon-20.hasura.app';
+const apiUrl = `https://${apiHost}/api/rest/`
+
+export const environment : IEnvironment = {
+  apiHost,
+  apiUrl,
+  enableDebugTools: false,
+  logLevel: 'debug',
   production: false
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
