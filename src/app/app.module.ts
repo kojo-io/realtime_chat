@@ -12,6 +12,7 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HttpInterceptorService} from "./utilities/http-interceptor.service";
 import { GraphQLModule } from './graphql.module';
+import {NbEvaIconsModule} from "@nebular/eva-icons";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { GraphQLModule } from './graphql.module';
     NbThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
     NbFirebaseAuthModule,
+    NbEvaIconsModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyAM4hReaYjM6y3Nun6bD2w054hQ-y1C_Sc",
       authDomain: "hasura-realtimechat.firebaseapp.com",
@@ -45,12 +47,12 @@ import { GraphQLModule } from './graphql.module';
           },
           register: {
             redirect: {
-              success: '/login'
+              success: '/auth/login'
             }
           },
           logout: {
             redirect:{
-              success: '/login'
+              success: '/auth/login'
             }
           }
         }),

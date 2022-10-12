@@ -17,18 +17,22 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./index/index.module').then(m => m.IndexModule)
       },
+      // {
+      //   path: 'login',
+      //   component: NbLoginComponent
+      // },
+      // {
+      //   path: 'register',
+      //   component: NbRegisterComponent
+      // },
+      // {
+      //   path: 'logout',
+      //   component: NbLogoutComponent
+      // }
       {
-        path: 'login',
-        component: NbLoginComponent
+        path: 'auth',
+        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
       },
-      {
-        path: 'register',
-        component: NbRegisterComponent
-      },
-      {
-        path: 'logout',
-        component: NbLogoutComponent
-      }
     ],
   }
 ];

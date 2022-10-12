@@ -37,7 +37,7 @@ export class AppComponent {
   }
 
   logOut() {
-    this.router.navigate(['/logout']);
+    this.router.navigate(['/auth/logout']);
   }
 
   createUser() {
