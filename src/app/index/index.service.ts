@@ -1,43 +1,55 @@
 import { Injectable } from '@angular/core';
 import {Apollo, gql} from "apollo-angular";
+import {HttpClient} from "@angular/common/http";
+import {EnvironmentService} from "../environment.service";
+import { Observable, Subject } from 'rxjs';
+import {AngularFireStorage} from "@angular/fire/compat/storage";
 
-const GetMessages = gql`
-subscription getMessages {
-  messages (order_by: {time: desc}) {
-    id
-    messages
-    time
-    userId
-  }
+const Getmessage = gql`
+subscription getMessage {
+User_Messages(
+order_by: {time: desc}, limit: 1
+) {
+id
+time
+messages
+name
 }
-`;
-
-interface Message {
-  id: number;
-  messages: string;
-  time: any;
-  userId: any;
-}
-
-interface ListMessage {
-  messages: Message[];
-}
+}`;
 
 @Injectable({
   providedIn: 'root'
 })
 export class IndexService {
-  messages!: ListMessage;
-  constructor(private apollo: Apollo) { }
+  users: Array<any> = [];
+  message = new Subject();
+  constructor(private apollo: Apollo,
+              private httpClient: HttpClient,
+              private fireStore: AngularFireStorage,
+              private env: EnvironmentService) {
+    this.getMessage();
+  }
 
-  getNotifications() {
-    this.apollo.subscribe<ListMessage>({
-      query: GetMessages
-    }).subscribe(({data} ) => {
-      // this.loading = false;
-      console.log('got data', data);
-    },(error) => {
-      console.log('there was an error sending the query', error);
-    });
+  getMessage() {
+    this.apollo.subscribe({
+      query: Getmessage
+    }).subscribe({
+      next: (data: any) => {
+//         console.log('got message', data);
+        this.message.next(data.data.User_Messages);
+
+      },
+      error: (err) => {
+//         console.log('some error', err);
+      }
+    })
+  }
+
+  sendMessage(data: any): Observable<any> {
+    return this.httpClient.post(`${this.env.apiUrl}Sendmessage`, data);
+  }
+
+  getMessages(): Observable<any> {
+    return this.httpClient.get(`${this.env.apiUrl}getAll`);
   }
 }

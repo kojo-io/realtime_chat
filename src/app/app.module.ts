@@ -13,6 +13,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HttpInterceptorService} from "./utilities/http-interceptor.service";
 import { GraphQLModule } from './graphql.module';
 import {NbEvaIconsModule} from "@nebular/eva-icons";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {NbEvaIconsModule} from "@nebular/eva-icons";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NbThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
